@@ -11,7 +11,8 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
   env: {
@@ -47,18 +48,18 @@ export default {
   firebase: {
     // options
     config: {
-      apiKey: "AIzaSyDs2uHay-1wFArnnQqv-HQGyyZTDBVxeyw",
-      authDomain: "fortunetracker-1bb65.firebaseapp.com",
-      projectId: "fortunetracker-1bb65",
-      storageBucket: "fortunetracker-1bb65.appspot.com",
-      messagingSenderId: "904805833444",
-      appId: "1:904805833444:web:1f8dae6d0e25480862aaf1",
-      measurementId: "G-0CC9301K05"
+      apiKey: 'AIzaSyDs2uHay-1wFArnnQqv-HQGyyZTDBVxeyw',
+      authDomain: 'fortunetracker-1bb65.firebaseapp.com',
+      projectId: 'fortunetracker-1bb65',
+      storageBucket: 'fortunetracker-1bb65.appspot.com',
+      messagingSenderId: '904805833444',
+      appId: '1:904805833444:web:1f8dae6d0e25480862aaf1',
+      measurementId: 'G-0CC9301K05'
     },
     services: {
       auth: true,
       firestore: true,
-      storage: true,
+      storage: true
     }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build

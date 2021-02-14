@@ -12,7 +12,7 @@
           rel="noopener noreferrer"
           class="button--green"
         >
-          Documentation
+          <span class="material-icons md-18">face</span>Documentation
         </a>
         <a
           href="https://github.com/nuxt/nuxt.js"
