@@ -32,6 +32,7 @@ html {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  max-width: 350px;
+  max-width: 450px;
+  width: 100%;
 }
 </style>

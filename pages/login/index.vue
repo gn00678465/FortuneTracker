@@ -95,7 +95,7 @@ export default {
       }
       this.$store.dispatch('users/login', this.account)
         .then(() => {
-          this.$router.push('/')
+          this.$router.push('/admin')
         })
         .catch((err) => {
           this.isError = true
