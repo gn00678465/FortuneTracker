@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* router class */
-.nuxt-link-exact-active {
+.router-link-exact-active {
   @apply text-primary;
 }
 

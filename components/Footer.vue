@@ -1,7 +1,7 @@
 <template>
   <nav ref="footer" class="absolute w-full bottom-0 text-white bg-dark py-2">
     <ul class="flex">
-      <nuxt-link
+      <!-- <nuxt-link
         v-for="path of paths"
         :key="path.path"
         tag="li"
@@ -12,7 +12,19 @@
         <p class="font-medium">
           {{ path.name }}
         </p>
-      </nuxt-link>
+      </nuxt-link> -->
+      <router-link v-for="path of paths" :key="path.path" v-slot="{ navigate, isActive, isExactActive }" :to="path.path" custom>
+        <li
+          :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']"
+          class="flex-1 text-center cursor-pointer"
+          @click="navigate"
+        >
+          <span class="material-icons text-4xl align-bottom select-none">{{ path.icon }}</span>
+          <p class="font-medium select-none">
+            {{ path.name }}
+          </p>
+        </li>
+      </router-link>
     </ul>
   </nav>
 </template>
