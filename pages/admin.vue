@@ -1,7 +1,7 @@
 <template>
   <div class="relative min-h-screen bg-secondary">
     <Header />
-    <nuxt-child />
+    <nuxt-child class="px-4" />
     <Footer />
   </div>
 </template>

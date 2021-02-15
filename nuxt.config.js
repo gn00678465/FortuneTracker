@@ -55,7 +55,8 @@ export default {
       storageBucket: 'fortunetracker-1bb65.appspot.com',
       messagingSenderId: '904805833444',
       appId: '1:904805833444:web:1f8dae6d0e25480862aaf1',
-      measurementId: 'G-0CC9301K05'
+      measurementId: 'G-0CC9301K05',
+      databaseURL: ''
     },
     services: {
       auth: true,
