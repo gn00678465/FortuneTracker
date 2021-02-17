@@ -4,7 +4,7 @@ import cookieparser from 'cookieparser'
 import JWTDecode from 'jwt-decode'
 
 export const actions = {
-  nuxtServerInit ({ commit }, { req }) {
+  nuxtServerInit ({ commit, dispatch }, { req }) {
     if (process.server && process.static) return
     if (!req.headers.cookie) return
     const cookieparsed = cookieparser.parse(req.headers.cookie)

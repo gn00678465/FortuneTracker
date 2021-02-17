@@ -18,31 +18,31 @@
       <li v-for="date of makeCalender" :key="`${date.months}-${date.date}`">
         <button
           type="button"
-          class="w-full pt-1 pb-3 text-md relative"
+          class="w-full pt-1.5 pb-2.5 text-md relative"
           :class="classes[setClass(date)]"
           :disabled="setClass(date) === 'out-of-month'"
           @click="selectCurrentDate(date)"
         >
           <p>{{ 10 > date.date ? `0${date.date}` : date.date }}</p>
-          <p v-if="setClass(date) !== 'out-of-month'">
+          <p v-show="showDots && setClass(date) !== 'out-of-month'">
             <span v-if="date.expanse !== 0" class="absolute bottom-1 left-1/3 w-1.5 h-1.5 rounded-full bg-expense"></span>
             <span v-if="date.inconme !== 0" class="absolute bottom-1 right-1/3 w-1.5 h-1.5 rounded-full bg-income"></span>
           </p>
         </button>
       </li>
     </ul>
-    <div class="flex justify-between items-center px-3">
-      <p class="text-white mr-2">
+    <div class="flex justify-between items-center">
+      <p v-show="showDots" class="text-white ml-3 mr-2">
         <span class="w-1.5 h-1.5 bg-expense rounded-full inline-block align-middle mr-1"></span>
         支出
       </p>
-      <p class="text-white mr-auto">
+      <p v-show="showDots" class="text-white">
         <span class="w-1.5 h-1.5 rounded-full bg-income inline-block align-middle mr-1"></span>
         收入
       </p>
-      <button type="button" class="focus:outline-none ative:outline-none text-primary" @click="setToday">
+      <button type="button" class="focus:outline-none ative:outline-none text-primary ml-auto mr-3 mb-1" @click="setToday">
         <span class="material-icons align-bottom">home</span>
-        <span>今天</span>
+        <span>回到今天</span>
       </button>
     </div>
   </div>
@@ -50,6 +50,12 @@
 
 <script>
 export default {
+  props: {
+    showDots: {
+      type: Boolean,
+      default: true
+    }
+  },
   data: () => ({
     weekDate: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
     today: undefined,
@@ -91,7 +97,13 @@ export default {
     }
   },
   created () {
-    this.today = this.currentDate = this.selectDate = this.date2Obj()
+    this.today = this.date2Obj()
+    if (this.$route.path.match('/admin/record')) {
+      this.selectDate = this.currentDate = this.$store.state.firebase.currentSelectDate || this.date2Obj()
+    } else {
+      this.selectDate = this.currentDate = this.today
+    }
+    this.commitStore('firebase/SET_CURRENTSELECTDATE', this.selectDate)
     this.commitStore('firebase/SET_CURRENTDATERANGE', this.dateRange)
   },
   methods: {
@@ -107,8 +119,8 @@ export default {
     },
     // 設定 class map
     setClass (date) {
-      if (this.$moment(date).isSame(this.currentDate, 'day')) { return 'select' }
-      if (this.$moment(date).isSame(this.today)) { return 'today' }
+      if (this.$moment(date).isSame(this.selectDate, 'day')) { return 'select' }
+      if (this.$moment(date).isSame(this.today, 'day')) { return 'today' }
       if (!this.$moment(date).isBetween(this.isAfter, this.isBefore)) { return 'out-of-month' }
     },
     // 回到當天
@@ -117,8 +129,9 @@ export default {
     },
     // 選擇一天
     selectCurrentDate (date) {
-      this.currentDate = date
+      this.selectDate = date
       this.commitStore('firebase/SET_CURRENTSELECTDATE', date)
+      this.$emit('datepicker_close')
     },
     commitStore (storeModule, value) {
       this.$store.commit(storeModule, value)
