@@ -27,7 +27,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/input-filter.js'
+    '~/plugins/input-filter.js',
+    { src: '~/plugins/vue-apexcharts.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -67,6 +68,17 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    vendor: ['vue-apexcharts'],
+    extend (config, { isDev, isClient }) {
+      if (!isDev) {
+        config.output.publicPath = './_nuxt/'
+      }
+      return config
+    },
+    filenames: {
+      app: () => '[name].js',
+      chunk: () => '[name].js'
+    }
   },
   router: {
     middleware: []
