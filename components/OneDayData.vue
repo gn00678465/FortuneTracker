@@ -1,7 +1,7 @@
 <template>
   <ul class="py-3">
     <li v-for="data of filterDatas" :key="data.id">
-      <Card v-bind="data"/>
+      <Card v-bind="data" />
     </li>
   </ul>
 </template>

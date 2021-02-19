@@ -1,7 +1,7 @@
 <template>
   <div>
     <Calendar />
-    <DayData />
+    <OneDayData />
   </div>
 </template>
 
