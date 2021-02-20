@@ -45,6 +45,22 @@ export const getters = {
       }
       return obj
     }, {})
+  },
+  // 依日期整理資料
+  dataSortByDate (state) {
+    if (!state.allRangeData) {
+      return undefined
+    }
+    return state.allRangeData.reduce((obj, item) => {
+      const date = item.date
+      if (!(date in obj)) {
+        obj[date] = []
+        obj[date].push(item)
+      } else {
+        obj[date].push(item)
+      }
+      return obj
+    }, {})
   }
 }
 

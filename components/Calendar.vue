@@ -139,6 +139,7 @@ export default {
       const { years, months, date } = this.$moment(this.currentDate)[calc](1, 'months').toObject()
       this.currentDate = { years, months, date }
       this.commitStore('firebase/SET_CURRENTDATERANGE', this.dateRange)
+      this.$store.dispatch('firebase/getRangeData')
     },
     // 設定 class map
     setClass (date) {
