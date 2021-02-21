@@ -26,120 +26,137 @@
       </li>
     </ul>
     <!-- 主要 form -->
-    <div class="mb-4">
-      <label class="block mb-1 text-white" for="price">金額</label>
-      <input
-        id="price"
-        v-model.number="formData.price"
-        v-input-filter:price
-        class="text-white text-2xl text-right w-full bg-secondary border border-solid border-white rounded-md p-2 transition-all duration-300
-        focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-        type="number"
-        name="price"
-        placeholder="0"
-      >
-    </div>
-    <div class="mb-4">
-      <label class="block mb-1 text-white" for="date">日期</label>
-      <Datepicker id="datePicker" :value="currentDate" />
-    </div>
-    <!-- expense 選擇分類 -->
-    <template v-if="formData.isExpense">
-      <div class="flex mb-4">
-        <div class="flex-1 mr-3">
+    <p v-if="!isLogin" class="text-danger">
+      請先
+      <router-link v-slot="{ navigate }" to="/login" custom>
+        <span class="py-5 cursor-pointer hover:text-info transition duration-300" @click="navigate">
+          登入
+        </span>
+      </router-link>
+      才可新增資料。
+    </p>
+    <form action="POST" @submit.prevent="submitData">
+      <div class="mb-4">
+        <label class="block mb-1 text-white" for="price">金額</label>
+        <input
+          id="price"
+          v-model.number="formData.price"
+          v-input-filter:price
+          class="text-white text-2xl text-right w-full bg-secondary border border-solid border-white rounded-md p-2 transition-all duration-300
+          focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+          type="number"
+          name="price"
+          placeholder="0"
+          required
+        >
+      </div>
+      <div class="mb-4">
+        <label class="block mb-1 text-white" for="date">日期</label>
+        <Datepicker id="datePicker" :value="currentDate" />
+      </div>
+      <!-- expense 選擇分類 -->
+      <template v-if="formData.isExpense">
+        <div class="flex mb-4">
+          <div class="flex-1 mr-3">
+            <label class="block mb-1 text-white" for="category">分類</label>
+            <select
+              id="category"
+              v-model="computeExpenseCategory"
+              name="category"
+              class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2"
+              required
+            >
+              <option
+                v-for="(category) of expenseCategories"
+                :key="category.id"
+                :value="category.id"
+              >
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+          <div class="flex-1">
+            <label class="block mb-1 text-white" for="subcategory">子分類</label>
+            <select
+              id="subcategory"
+              v-model="computeExpenseSubcategory"
+              name="subcategory"
+              class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2"
+              required
+            >
+              <option v-for="subcategory of expenseSubcategories" :key="subcategory.id" :value="subcategory.id">
+                {{ subcategory.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </template>
+      <!-- income 選擇分類 -->
+      <template v-else>
+        <div class="flex-1 mb-4">
           <label class="block mb-1 text-white" for="category">分類</label>
           <select
             id="category"
-            v-model="computeExpenseCategory"
+            v-model.trim="computeIncomeCategory"
             name="category"
             class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2"
+            required
           >
-            <option
-              v-for="(category) of expenseCategories"
-              :key="category.id"
-              :value="category.id"
-            >
+            <option v-for="category of incomeCategories" :key="category.id" :value="category.id">
               {{ category.name }}
             </option>
           </select>
         </div>
-        <div class="flex-1">
-          <label class="block mb-1 text-white" for="subcategory">子分類</label>
-          <select
-            id="subcategory"
-            v-model="computeExpenseSubcategory"
-            name="subcategory"
-            class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2"
-          >
-            <option v-for="subcategory of expenseSubcategories" :key="subcategory.id" :value="subcategory.id">
-              {{ subcategory.name }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </template>
-    <!-- income 選擇分類 -->
-    <template v-else>
-      <div class="flex-1 mb-4">
-        <label class="block mb-1 text-white" for="category">分類</label>
-        <select
-          id="category"
-          v-model.trim="computeIncomeCategory"
-          name="category"
-          class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2"
+      </template>
+      <!--  -->
+      <div class="mb-4">
+        <label class="block mb-1 text-white" for="store">商家</label>
+        <input
+          id="store"
+          v-model="formData.store"
+          type="text"
+          name="store"
+          placeholder="請輸入商家名稱"
+          class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2 transition-all duration-300
+          focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
         >
-          <option v-for="category of incomeCategories" :key="category.id" :value="category.id">
-            {{ category.name }}
-          </option>
-        </select>
       </div>
-    </template>
-    <!--  -->
-    <div class="mb-4">
-      <label class="block mb-1 text-white" for="store">商家</label>
-      <input
-        id="store"
-        v-model="formData.store"
-        type="text"
-        name="store"
-        placeholder="請輸入商家名稱"
-        class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2 transition-all duration-300
-        focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-      >
-    </div>
-    <div class="mb-4">
-      <label class="block mb-1 text-white" for="notes">備註</label>
-      <textarea
-        id="notes"
-        v-model.trim="formData.notes"
-        class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2 transition-all duration-300
-        focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-        type="text"
-        name="notes"
-        rows="5"
-      />
-    </div>
-    <div class="flex">
-      <button
-        class="flex-1 border border-solid border-white py-2 rounded text-white mr-2 font-medium
-        transition-colors duration-300 hover:bg-primary hover:border-primary hover:text-black focus:outline-none"
-        @click.prevent="pushData"
-      >
-        <template v-if="!isEdit">
-          新增資料
-        </template>
-        <template v-else>
-          修改資料
-        </template>
-      </button>
-      <button
-        class="flex-1 border border-solid border-white py-2 rounded text-white font-medium
-        transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none"
-        @click.prevent="resetForm(formData.isExpense)"
-      >
-        重置
-      </button>
-    </div>
+      <div class="mb-4">
+        <label class="block mb-1 text-white" for="notes">備註</label>
+        <textarea
+          id="notes"
+          v-model.trim="formData.notes"
+          class="text-white w-full bg-secondary border border-solid border-white rounded-md p-2 transition-all duration-300
+          focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+          type="text"
+          name="notes"
+          rows="5"
+        />
+      </div>
+      <div class="flex">
+        <button
+          type="submit"
+          class="flex-1 border border-solid border-primary py-2 rounded text-primary mr-2 font-medium
+          transition-colors duration-300 hover:bg-primary hover:text-black focus:outline-none
+          disabled:opacity-60 disabled:border-white disabled:bg-secondary disabled:text-white disabled:cursor-not-allowed"
+          :disabled="!isLogin"
+        >
+          <template v-if="!isEdit">
+            新增資料
+          </template>
+          <template v-else>
+            修改資料
+          </template>
+        </button>
+        <button
+          class="flex-1 border border-solid border-white py-2 rounded text-white font-medium
+          transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none"
+          @click.prevent="resetForm(formData.isExpense)"
+        >
+          重置
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -163,6 +180,10 @@ export default {
     }
   },
   computed: {
+    // 判斷是否有登入
+    isLogin () {
+      return this.$store.getters['users/isLogin']
+    },
     // URL 有 query 判斷為編輯中
     isEdit () {
       return ('id' in this.$route.params)
@@ -229,7 +250,7 @@ export default {
   },
   methods: {
     // 新增資料到 firebase
-    pushData () {
+    submitData () {
       const { isExpense, price, category, subcategory } = this.formData
       if ((!price || !category) && (!isExpense || !subcategory)) {
         return

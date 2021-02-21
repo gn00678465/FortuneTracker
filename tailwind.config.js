@@ -24,7 +24,13 @@ module.exports = {
     }
   },
   variants: {
-    extend: {}
+    extend: {
+      opacity: ['disabled'],
+      borderColor: ['disabled'],
+      textColor: ['disabled'],
+      backgroundColor: ['disabled'],
+      cursor: ['disabled']
+    }
   },
   plugins: []
 }

@@ -4,6 +4,12 @@ export const state = () => ({
   user: null
 })
 
+export const getters = {
+  isLogin (state) {
+    return !!state.user
+  }
+}
+
 export const mutations = {
   SET_USER: (state, payload) => {
     state.user = payload
@@ -30,6 +36,8 @@ export const actions = {
     await this.$fire.auth.signOut()
     try {
       commit('SET_USER', null)
+      // 將 token 寫入 cookie
+      Cookie.remove('access_token')
     } catch (err) {
       return err
     }

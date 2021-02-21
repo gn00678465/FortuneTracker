@@ -69,17 +69,17 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    vendor: ['vue-apexcharts'],
-    extend (config, { isDev, isClient }) {
-      if (!isDev) {
-        config.output.publicPath = './_nuxt/'
-      }
-      return config
-    },
-    filenames: {
-      app: () => '[name].js',
-      chunk: () => '[name].js'
-    }
+    vendor: ['vue-apexcharts']
+    // extend (config, { isDev, isClient }) {
+    //   if (!isDev) {
+    //     config.output.publicPath = './_nuxt/'
+    //   }
+    //   return config
+    // },
+    // filenames: {
+    //   app: () => '[name].js',
+    //   chunk: () => '[name].js'
+    // }
   },
   router: {
     middleware: []

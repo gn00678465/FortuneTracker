@@ -25,7 +25,7 @@
 export default {
   computed: {
     isLogin () {
-      return !!this.$store.state.users.user
+      return this.$store.getters['users/isLogin']
     }
   },
   methods: {
