@@ -25,5 +25,13 @@ export const actions = {
     } catch (err) {
       return err
     }
+  },
+  async logout ({ commit }) {
+    await this.$fire.auth.signOut()
+    try {
+      commit('SET_USER', null)
+    } catch (err) {
+      return err
+    }
   }
 }
