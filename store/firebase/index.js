@@ -24,6 +24,9 @@ export const getters = {
   },
   // 依日期分類並計算次數
   sortByDateAndCount (state) {
+    if (!state.allRangeData) {
+      return {}
+    }
     return state.allRangeData.reduce((obj, item) => {
       if (!(item.date in obj)) {
         obj[item.date] = {

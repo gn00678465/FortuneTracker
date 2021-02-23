@@ -12,6 +12,9 @@ export default {
     filterDatas () {
       const selectDate = this.$store.state.firebase.currentSelectDate
       const allData = this.$store.state.firebase.allRangeData
+      if (!allData) {
+        return []
+      }
       return allData.filter((data) => {
         return data.date === this.$moment(selectDate).unix()
       })
