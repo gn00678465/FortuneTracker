@@ -25,8 +25,8 @@
         >
           <p>{{ 10 > date.date ? `0${date.date}` : date.date }}</p>
           <p v-show="showDots && setClass(date) !== 'out-of-month'">
-            <span v-if="date.expense" class="absolute bottom-1 left-1/3 w-1.5 h-1.5 rounded-full bg-expense" />
-            <span v-if="date.income" class="absolute bottom-1 right-1/3 w-1.5 h-1.5 rounded-full bg-income" />
+            <span v-show="date.expense" class="absolute bottom-1 left-1/3 w-1.5 h-1.5 rounded-full bg-expense" />
+            <span v-show="date.income" class="absolute bottom-1 right-1/3 w-1.5 h-1.5 rounded-full bg-income" />
           </p>
         </button>
       </li>

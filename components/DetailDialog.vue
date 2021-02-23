@@ -72,7 +72,7 @@ export default {
     },
     editHandler (id) {
       this.closeHandler()
-      this.$router.push({ name: 'admin-record', params: { id } })
+      this.$router.push({ name: 'admin-record', params: { id, name: '編輯記帳' } })
     },
     delHandler () {
       this.$store.dispatch('firebase/deleteData', this.id).then(() => {

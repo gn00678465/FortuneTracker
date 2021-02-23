@@ -13,7 +13,7 @@
           {{ path.name }}
         </p>
       </nuxt-link> -->
-      <router-link v-for="path of paths" :key="path.path" v-slot="{ navigate, isActive, isExactActive }" :to="path.path" custom>
+      <router-link v-for="path of paths" :key="path.path" v-slot="{ navigate, isActive, isExactActive }" :to="{ name: path.path, params: { name: path.name }}" custom>
         <li
           :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']"
           class="flex-1 text-center cursor-pointer"
@@ -36,27 +36,27 @@ export default {
       {
         name: '記帳日誌',
         icon: 'event',
-        path: '/admin'
+        path: 'admin'
       },
       {
         name: '帳戶總覽',
         icon: 'attach_money',
-        path: '/admin/overview'
+        path: 'admin-overview'
       },
       {
         name: '新增記帳',
         icon: 'add',
-        path: '/admin/record'
+        path: 'admin-record'
       },
       {
         name: '項目分析',
         icon: 'insert_chart_outlined',
-        path: '/admin/analysis'
+        path: 'admin-analysis'
       },
       {
         name: '設定',
         icon: 'settings',
-        path: '/admin/setting'
+        path: 'admin-setting'
       }
     ]
   })
