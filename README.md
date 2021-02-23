@@ -1,8 +1,10 @@
 # 我的記賬本
 
-記帳軟體 Side Project，包含記帳紀錄之建置、修改、刪除等功能，以及圖表分析。
-頁面設計參考 [Money Tracker](https://github.com/waveciou/MoneyTracker)
 [Demo](https://fortunetracker-1bb65.uc.r.appspot.com/admin)
+
+記帳軟體 Side Project，包含記帳紀錄之建置、修改、刪除等功能，以及圖表分析。
+
+頁面設計參考 [Money Tracker](https://github.com/waveciou/MoneyTracker)
 
 ![](README.png)
 
