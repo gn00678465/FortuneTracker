@@ -126,12 +126,12 @@ export default {
     this.commitStore('firebase/SET_CURRENTSELECTDATE', this.today)
     // 將本月頭尾寫入 store
     this.commitStore('firebase/SET_CURRENTDATERANGE', this.dateRange)
-    // 取得區間資料
-    await this.$store.dispatch('firebase/getRangeData')
     // 取得所有分類
     if (!this.$store.state.firebase.allCategories) {
       await this.$store.dispatch('firebase/getAllCategories')
     }
+    // 取得區間資料
+    await this.$store.dispatch('firebase/getRangeData')
   },
   methods: {
     date2Obj (inputDate) {

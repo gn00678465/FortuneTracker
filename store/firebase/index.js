@@ -109,8 +109,12 @@ export const actions = {
     })
   },
   // 修改資料並更新資料庫
-  async updateData ({ dispatch }, payload) {
-    await this.$fire.firestore.collection(process.env.collection).doc(payload.id).update(payload.data)
+  async updateData ({ state, dispatch }, payload) {
+    const date = this.$moment(state.currentSelectDate).unix()
+    await this.$fire.firestore.collection(process.env.collection).doc(payload.id).update({
+      ...payload.data,
+      date
+    })
     dispatch('getRangeData')
     return new Promise((resolve, reject) => {
       resolve()

@@ -17,7 +17,7 @@ export default {
     ]
   },
   env: {
-    collection: 'example2'
+    collection: 'tracker'
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
