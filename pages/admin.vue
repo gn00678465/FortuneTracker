@@ -1,7 +1,7 @@
 <template>
-  <div class="relative min-h-screen bg-secondary">
+  <div class="relative h-full pt-14 bg-secondary">
     <Header />
-    <nuxt-child class="px-4 overflow-y-auto overflow-x-hidden main-height" />
+    <nuxt-child class="px-4 mt-1 overflow-y-auto overflow-x-hidden main-height" />
     <Footer />
   </div>
 </template>
@@ -13,9 +13,8 @@ export default {
 </script>
 
 <style>
-
 .main-height {
-  height: calc(100vh - 56px - 80px);
+  height: calc(100% - 80px);
 }
 
 </style>

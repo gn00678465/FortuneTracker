@@ -1,5 +1,5 @@
 <template>
-  <header ref="header" class="w-full text-center text-2xl font-medium py-3 text-white">
+  <header ref="header" class="fixed top-0 container text-center text-2xl font-medium py-3 text-white bg-secondary z-10">
     {{ header }}
   </header>
 </template>
@@ -13,3 +13,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container {
+  max-width: 480px;
+  width: 100%;
+}
+</style>

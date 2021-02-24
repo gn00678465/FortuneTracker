@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <Nuxt class="container" />
-  </div>
+  <Nuxt class="container" />
 </template>
 
 <style>
-html {
+html, body {
   font-family:
     'Noto Sans TC',
     -apple-system,
@@ -22,6 +20,10 @@ html {
   @apply bg-black;
 }
 
+body, html, #__nuxt,#__layout {
+  height: 100%;
+}
+
 *,
 *::before,
 *::after {
@@ -31,8 +33,7 @@ html {
 
 .container {
   margin: 0 auto;
-  min-height: 100vh;
-  max-width: 450px;
+  max-width: 480px;
   width: 100%;
 }
 </style>
