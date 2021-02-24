@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{251:function(r,e,n){"use strict";n.r(e);var o={asyncData:function(r){r.isDev,r.route,r.store,r.env,r.params,r.query,r.req,r.res;var e=r.redirect;r.error;return e("/admin")}},t=n(30),component=Object(t.a)(o,void 0,void 0,!1,null,null,null);e.default=component.exports}}]);
