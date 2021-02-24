@@ -1,6 +1,6 @@
 # 我的記賬本
 
-[Demo](https://fortunetracker-1bb65.uc.r.appspot.com/admin)
+Github pages PWA 應用程式 [Demo](https://gn00678465.github.io/FortuneTracker/admin/)
 
 記帳軟體 Side Project，包含記帳紀錄之建置、修改、刪除等功能，以及圖表分析。
 
