@@ -116,7 +116,7 @@ export default {
     }
   },
   async created () {
-    this.today = this.$store.state.firebase.currentSelectDate
+    this.today = this.date2Obj()
     if (this.$route.path.match('/admin/record')) {
       this.selectDate = this.currentDate = this.$store.state.firebase.currentSelectDate || this.date2Obj()
     } else {
