@@ -49,6 +49,7 @@ export default {
   modules: [
     '@nuxtjs/firebase'
   ],
+  // firebase 設定
   firebase: {
     // options
     config: {
@@ -64,7 +65,8 @@ export default {
     services: {
       auth: true,
       firestore: true,
-      storage: true
+      storage: true,
+      collectionEnabled: true
     }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
