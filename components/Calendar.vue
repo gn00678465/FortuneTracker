@@ -160,6 +160,9 @@ export default {
     // 回到當天
     setToday () {
       this.currentDate = this.selectDate = this.today
+      this.commitStore('firebase/SET_CURRENTSELECTDATE', this.today)
+      this.commitStore('firebase/SET_CURRENTDATERANGE', this.dateRange)
+      this.$store.dispatch('firebase/getRangeData')
     },
     // 選擇一天
     selectCurrentDate (date) {
